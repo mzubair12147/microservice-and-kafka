@@ -1,6 +1,6 @@
 
 // tells where kafka running
-export const KAFKA_BROKER = process.env.KAFKA_BROKER ?? "localhost:9092";
+export const KAFKA_BROKER = process.env.KAFKA_BROKER ?? "localhost:29092";
 
 // acts as a unique identifier for your app
 export const KAFKA_CLIENT_ID = process.env.KAFKA_CLIENT_ID ?? "eventmanagerapp";
