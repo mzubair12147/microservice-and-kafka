@@ -1,30 +1,33 @@
-import { Injectable, OnModuleDestroy } from '@nestjs/common';
-import { drizzle, NodePgDatabase } from 'drizzle-orm/node-postgres';
-import { Pool } from 'pg';
+import {Injectable, OnModuleDestroy} from "@nestjs/common";
+import { drizzle, NodePgDatabase } from "drizzle-orm/node-postgres";
+import { Pool } from "pg";
 import * as schema from "./schema";
 
 @Injectable()
 export class DatabaseService implements OnModuleDestroy {
-    private pool: Pool
+    private pool: Pool;
     public db: NodePgDatabase<typeof schema>;
 
-    constructor() {
+    constructor(){
         const connectionString = process.env.DATABASE_URL;
-        if(!connectionString) throw new Error("DATABASE_URL is not defined");
+        if(!connectionString){
+            throw new Error("Database url is not set");
+        }
 
-        this.pool = new Pool({ 
+        this.pool = new Pool({
             connectionString: connectionString
         })
 
         this.db = drizzle(this.pool, {schema});
-        console.log("database connected");
+
+        console.log("database is connected");
     }
 
     get schema(){
         return schema;
     }
 
-    async onModuleDestroy() {
-        await this.pool.end();
+    onModuleDestroy() {
+        this.pool.end();
     }
 }
