@@ -6,8 +6,7 @@ import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
-    HttpModule,
-    ConfigModule.forRoot()
+    HttpModule
   ],
   providers: [AuthService],
   controllers: [AuthController]
