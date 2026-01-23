@@ -7,7 +7,7 @@ import {
     Put,
     Request,
     UseGuards,
-} from '@nestjs/common';
+} from '@nestjs/common'; 
 import { EventsService } from './events.service';
 import { AuthGuard } from '@nestjs/passport';
 import { CreateEventDto, UpdateEventDto } from '@app/common';
@@ -17,8 +17,9 @@ export class EventsController {
     constructor(private readonly eventsService: EventsService) {}
 
     @Get()
-    findAll() {
-        return this.eventsService.findAll();
+    async findAll() {
+        console.log("getting all the events");
+        return await this.eventsService.findAll();
     }
 
     // protected routes
