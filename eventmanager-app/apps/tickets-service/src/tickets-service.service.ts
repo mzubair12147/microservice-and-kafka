@@ -20,8 +20,8 @@ export class TicketsServiceService implements OnModuleInit {
         private readonly dbService: DatabaseService,
     ) {}
 
-    onModuleInit() {
-        this.kafkaClient.connect();
+    async onModuleInit() {
+        await this.kafkaClient.connect();
     }
 
     async purchase(purchaseTicketDto: PurchaseTicketDto, userId: string) {
